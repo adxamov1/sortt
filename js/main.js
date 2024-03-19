@@ -8,14 +8,18 @@ function fnRender(data){
     data.forEach((item)=>{
         var newLi = document.createElement('li')
         newLi.innerHTML = `
-        <div class="card" style="width: 18rem;">
+        <div class="card mt-3" style="width: 18rem;">
         <img src="	https://i.ytimg.com/vi/${item.ytid}/hq720.jpg" class="card-img-top" alt="...">
         <div class="card-body">
-            <h5 class="card-title">${item.title}</h5>
-            <p class="card-text">${item.Categories}</p>
+            <h5 class="card-title">${item.Title.toString().splice(0, 20)}</h5>
+            <p class="card-text">${item.Categories.toString().splice(0, 15)}</p>
             <p class="card-text">${item.movie_year}</p>
             <p class="card-text">${item.imdb_rating}</p>
-            <a href="https://www.youtube.com/watch?v=${item.ytid}" target="blank" class="btn btn-primary">watch movie</a>
+            <div class="d-flex justify-content-between align-items-center">
+            <a href="https://www.youtube.com/watch?v=${item.ytid}" target="blank" class="btn 
+            btn-primary">watch movie</a>
+            <i onclick="setId(`${item.ytid}`)" class="bi bi-heart"></i>
+            </div>
         </div>
         </div>
         `
@@ -61,11 +65,25 @@ function fnRanting(value){
    }
   
   
+   function fnSearch(value){
+      value.preventDefault()
+      var val = value.target.inpSearch.value
+      fnRender(part.Movie.filter((item)=>item.Title.toString().toLowerCase().includes(val.toLowerCase()) == true));
+   }
+  
+
+
+   var faoArr = []
+  function setId(id){
+    faoArr.push(partMovie.find((item)=> item.ytid == id)) 
+    console.log(faoArr);
+  }
   
   
-  
-  
-  
+var arr = [5,4,3,2,2,5,7]
+window.localStorage.setItem('a',JSON.stringify(arr))
+console.log(arr);
+console.log(JSON.parse(window.localStorage.getItem('a')));
   
   
   
